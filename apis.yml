@@ -1,17 +1,15 @@
 aid: bookingcom
-url: 
-  https://raw.githubusercontent.com/api-evangelist/bookingcom/refs/heads/main/apis.yml
+url: https://raw.githubusercontent.com/api-evangelist/bookingcom/refs/heads/main/apis.yml
 modified: '2026-03-21'
 apis:
   - aid: bookingcom:booking-api
     name: Booking.com API
     tags:
-      - Travel
+      - Hospitality
       - Hotels
       - Reservations
-      - Hospitality
-    image: 
-      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+      - Travel
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.booking.com
     humanURL: https://developers.booking.com/
     properties:
