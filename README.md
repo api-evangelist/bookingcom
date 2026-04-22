@@ -1,46 +1,25 @@
-# Booking.com (bookingcom)
-Booking.com is a Fortune 500 company that provides developer APIs and integration capabilities through its developer platform. Booking.com provides APIs for hotel search, availability, rates, reservations, and property management. The Connectivity APIs enable partners to distribute and manage accommodation inventory.
+# Booking.com
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/bookingcom/refs/heads/main/apis.yml)
+Booking.com is the world's leading online travel platform for accommodations, offering over 28 million listings including hotels, apartments, villas, homes, and unique places to stay. Part of Booking Holdings, Booking.com provides APIs for affiliate partners and connectivity partners to integrate its extensive travel inventory into third-party applications and property management systems.
 
-## Scope
+**URL:** [https://www.booking.com](https://www.booking.com)
 
-- **Type:** Contract
-- **Position:** Consuming
-- **Access:** 3rd-Party
+**Developer Portal:** [https://developers.booking.com](https://developers.booking.com)
 
-## Tags:
-
- - Travel, Hotels, Reservations, Hospitality
-
-## Timestamps
-
-- **Created:** 2026-03-21
-- **Modified:** 2026-03-21
+**APIs.yml:** [View APIs Index](https://raw.githubusercontent.com/api-evangelist/bookingcom/refs/heads/main/apis.yml)
 
 ## APIs
 
-### Booking.com API
-Booking.com provides APIs for hotel search, availability, rates, reservations, and property management. The Connectivity APIs enable partners to distribute and manage accommodation inventory.
+### Demand API
+RESTful API enabling Affiliate Partners to search accommodations, check availability, retrieve reviews, and get property details. Requires HTTPS POST with Affiliate ID and token authentication.
 
-**Human URL:** [https://developers.booking.com/](https://developers.booking.com/)
+### Connectivity APIs
+APIs for property management systems and channel managers to manage accommodation inventory on Booking.com, including content, reservations, rates, availability, and promotions.
 
+## Related Repositories
 
-#### Tags:
-
- - Travel, Hotels, Reservations, Hospitality
-
-#### Properties
-
-- [Documentation](https://developers.booking.com/)
-- [OpenAPI](openapi/bookingcom-booking-api-openapi.yml)
-
-## Common Properties
-
-- [Website](https://www.bookingcom.com)
+- [booking-com](https://github.com/api-evangelist/booking-com) - Primary Booking.com API profile with full OpenAPI specs
 
 ## Maintainers
 
-**FN:** API Evangelist
-
-**Email:** info@apievangelist.com
+- **Kin Lane** - kinlane@gmail.com
