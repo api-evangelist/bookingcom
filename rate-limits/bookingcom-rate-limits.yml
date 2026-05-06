@@ -4,7 +4,8 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Booking.com
 providerId: bookingcom
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
   - Accommodations
   - Affiliates
@@ -14,78 +15,39 @@ tags:
   - Reservations
   - Travel
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Booking.com API surface. Captures per-tier
-  quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to
-  be replaced with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+description: Booking.com does not publish per-second or per-minute API rate limits on its public developer
+  site; rate-limit terms are communicated to certified Connectivity and Demand API partners under contract.
+  Consumers should expect HTTP 429 throttling on overuse and apply exponential backoff. Reconcile against
+  the partner-specific technical specification once available.
+sources:
+  - https://developers.booking.com/
+  - https://legacy.developers.booking.com/api
+notes: Rate limits are not publicly published; values are partner-specific and conveyed via Connectivity
+  / Demand API technical onboarding documents.
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
   serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Booking.com API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Booking.com API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Booking.com API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Booking.com API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Booking.com API
+  - name: Demand API request rate
+    scope: partner
+    metric: varies
+    limit: 'see partner technical specification'
+    notes: Per-partner negotiated; not publicly published.
+  - name: Connectivity API request rate
+    scope: partner
+    metric: varies
+    limit: 'see partner technical specification'
+    notes: Per-partner negotiated; not publicly published.
 policies:
   - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
+    description: Apply exponential backoff with jitter on 429 and 5xx responses; honor Retry-After when
+      present.
+  - name: Partner-Bound Quotas
+    description: Effective request budget is set in the partner contract and onboarding spec, not via a
+      public tier page.
   - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+    description: Sustained traffic that materially impacts shared infrastructure is reviewed and may trigger
+      throttling regardless of contract.
 maintainers:
   - FN: Kin Lane
     email: kinlane@gmail.com

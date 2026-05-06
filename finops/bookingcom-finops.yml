@@ -1,5 +1,6 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
@@ -8,10 +9,11 @@ alignedWith:
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
 provider: Booking.com
 providerId: bookingcom
-publisherName: Booking.com
-serviceCategory: API
+publisherName: Booking.com B.V.
+serviceCategory: Travel & Hospitality
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
   - Accommodations
   - Affiliates
@@ -21,115 +23,71 @@ tags:
   - Reservations
   - Travel
   - FinOps
-  - Cost Management
   - FOCUS
-description: FinOps framework definition for the Booking.com API surface. Provides a FOCUS-aligned mapping
-  for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+description: 'FOCUS-aligned FinOps for Booking.com partner APIs: an affiliate / connectivity model where
+  approved partners pay no per-request fee but settle commercials on commission share from confirmed stays
+  or contracted connectivity terms.'
+sources:
+  - https://developers.booking.com/
+  - https://legacy.developers.booking.com/api
+notes: No public pricing; commercial model is partner agreement and commission share, not metered API
+  spend. Reconcile once partner agreement terms are in scope.
 billingModel:
-  pricingCategory: Usage-Based
+  pricingCategory: Commission / Partner Agreement
   billingFrequency: Monthly
-  billingCurrency: USD
+  billingCurrency: USD/EUR/GBP
   chargeCategories:
-    - Usage
-    - Purchase
-    - Tax
-    - Credit
     - Adjustment
-  chargeFrequency: Recurring
+    - Credit
+    - Tax
 focusColumns:
   ServiceName: Booking.com
-  ServiceCategory: Developer Tools / API
+  ServiceCategory: Travel & Hospitality
   ProviderName: Booking.com
-  PublisherName: Booking.com
-  InvoiceIssuerName: Booking.com
-  PricingCategory: Usage-Based
-  PricingUnit: request
-  BillingCurrency: USD
-  ChargeCategory: Usage
+  PublisherName: Booking.com B.V.
+  InvoiceIssuerName: Booking.com B.V.
+  BillingCurrency: EUR
+  PricingCategory: Other
+  PricingUnit: completed-stay
 meters:
+  - name: completed_stays
+    description: Number of completed bookings attributed to the affiliate / partner channel.
+    unit: stay
+    aggregation: sum
+    dimensions:
+      - partner
+      - market
+      - property_type
+  - name: booking_value
+    description: Gross booking value of completed stays, used as the commission base.
+    unit: currency
+    aggregation: sum
+    dimensions:
+      - partner
+      - currency
+      - market
   - name: api_requests
-    description: Count of billable API requests
+    description: Demand / Connectivity API request volume; used for capacity and fair-use review rather
+      than direct billing.
     unit: request
     aggregation: sum
     dimensions:
       - api
       - endpoint
-      - tier
-      - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
-    aggregation: sum
-    dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
-    aggregation: sum
-    dimensions:
-      - api
-      - endpoint
-      - tier
-apis:
-  - name: Booking.com API
-    baseURL: https://api.booking.com
-    tags:
-      - Hospitality
-      - Hotels
-      - Reservations
-      - Travel
-    serviceName: Booking.com API
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+      - partner
+principles:
+  - name: Visibility
+    description: Reconcile completed-stay reports and commission statements from the Booking.com Partner
+      Hub against your internal booking and traffic data.
+  - name: Allocation
+    description: Tag affiliate traffic with campaign / property / market so commission revenue and any
+      contracted connectivity costs allocate cleanly to product lines.
+  - name: Optimization
+    description: Tune affiliate placements toward higher-converting markets and property types; cache search
+      results within partner-allowed TTLs to reduce Demand API load.
+  - name: Accountability
+    description: Assign a partner-relationship owner; review monthly statements, dispute discrepancies
+      against booking and stay data, and track commission share against renewal targets.
 maintainers:
   - FN: Kin Lane
     email: kinlane@gmail.com
