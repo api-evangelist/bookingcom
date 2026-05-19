@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Booking.com API — Travel
+  description: 'Booking.com API — Travel. 1 operations. Lead operation: Get API status. Self-contained Naftiko capability
+    covering one Bookingcom business surface.'
+  tags:
+  - Bookingcom
+  - Travel
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    BOOKINGCOM_API_KEY: BOOKINGCOM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: booking-travel
+    baseUri: https://api.booking.com
+    description: Booking.com API — Travel business capability. Self-contained, no shared references.
+    resources:
+    - name: status
+      path: /status
+      operations:
+      - name: getstatus
+        method: GET
+        description: Get API status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.BOOKINGCOM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: booking-travel-rest
+    port: 8080
+    description: REST adapter for Booking.com API — Travel. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/status
+      name: status
+      description: REST surface for status.
+      operations:
+      - method: GET
+        name: getstatus
+        description: Get API status
+        call: booking-travel.getstatus
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: booking-travel-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Booking.com API — Travel. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-api-status
+      description: Get API status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: booking-travel.getstatus
+      outputParameters:
+      - type: object
+        mapping: $.
