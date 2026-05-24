@@ -57,6 +57,8 @@ common:
     url: https://www.booking.com/content/privacy.html
   - type: TermsOfService
     url: https://www.booking.com/content/terms.html
+  - type: LLMsTxt
+    url: https://developers.booking.com/llms.txt
 maintainers:
   - FN: Kin Lane
     email: kinlane@gmail.com
