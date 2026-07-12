@@ -39,6 +39,12 @@ apis:
       Booking.com provides APIs for hotel search, availability, rates, reservations, and property management. The
       Connectivity APIs enable partners to distribute and manage accommodation inventory.
 common:
+  - type: VulnerabilityDisclosure
+    url: security/bookingcom-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/bookingcom-domain-security.yml
+  - type: Authentication
+    url: authentication/bookingcom-authentication.yml
   - type: GitHubOrganization
     url: https://github.com/bookingcom
   - type: Website
@@ -59,6 +65,8 @@ common:
     url: https://www.booking.com/content/terms.html
   - type: LlmsText
     url: https://developers.booking.com/llms.txt
+  - url: https://news.booking.com/feed/
+    type: Blog
 maintainers:
   - FN: Kin Lane
     email: kinlane@gmail.com
