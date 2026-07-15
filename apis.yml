@@ -39,6 +39,8 @@ apis:
       Booking.com provides APIs for hotel search, availability, rates, reservations, and property management. The
       Connectivity APIs enable partners to distribute and manage accommodation inventory.
 common:
+  - type: AgenticAccess
+    url: agentic-access/bookingcom-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/bookingcom-vulnerability-disclosure.yml
   - type: DomainSecurity
