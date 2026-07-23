@@ -1,32 +1,27 @@
 openapi: 3.1.0
 info:
-  title: Booking.com API
-  description: >-
-    Booking.com provides APIs for hotel search, availability, rates, reservations, and property management. The Connectivity APIs enable partners to distribute and manage accommodation inventory.
+  title: Booking.com Travel API
+  description: Booking.com provides APIs for hotel search, availability, rates, reservations, and property management. The Connectivity APIs enable partners to distribute and manage accommodation inventory.
   version: '1.0'
   contact:
     name: Booking.com Developer Support
     url: https://developers.booking.com/
-externalDocs:
-  description: Documentation
-  url: https://developers.booking.com/
 servers:
-  - url: https://api.booking.com
-    description: Production
-tags:
-  - name: Travel
-    description: Travel operations
+- url: https://api.booking.com
+  description: Production
 security:
-  - bearerAuth: []
+- bearerAuth: []
+tags:
+- name: Travel
+  description: Travel operations
 paths:
   /status:
     get:
       operationId: getStatus
       summary: Get API status
-      description: >-
-        Returns the current status of the API.
+      description: Returns the current status of the API.
       tags:
-        - Travel
+      - Travel
       responses:
         '200':
           description: Success
@@ -48,3 +43,6 @@ components:
     bearerAuth:
       type: http
       scheme: bearer
+externalDocs:
+  description: Documentation
+  url: https://developers.booking.com/
