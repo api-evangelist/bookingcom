@@ -6,7 +6,20 @@ description: >-
   APIs for affiliate partners and connectivity partners to integrate its extensive travel inventory into third-party
   applications and property management systems.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/bookingcom.png
 url: https://raw.githubusercontent.com/api-evangelist/bookingcom/refs/heads/main/apis.yml
 created: '2024-01-01'
 modified: '2026-05-19'
@@ -20,24 +33,18 @@ tags:
   - Reservations
   - Travel
 apis:
-  - aid: bookingcom:booking-api
-    name: Booking.com API
-    tags:
-      - Hospitality
-      - Hotels
-      - Reservations
-      - Travel
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://api.booking.com
-    humanURL: https://developers.booking.com/
-    properties:
-      - url: https://developers.booking.com/
-        type: Documentation
-      - url: openapi/bookingcom-booking-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      Booking.com provides APIs for hotel search, availability, rates, reservations, and property management. The
-      Connectivity APIs enable partners to distribute and manage accommodation inventory.
+- aid: bookingcom:bookingcom-travel-api
+  name: Booking.com Travel API
+  description: Travel operations
+  humanURL: https://developers.booking.com/
+  baseURL: https://api.booking.com
+  tags:
+  - Travel
+  properties:
+  - type: OpenAPI
+    url: openapi/bookingcom-travel-api-openapi.yml
+  - type: Documentation
+    url: https://developers.booking.com/
 common:
   - type: AgenticAccess
     url: agentic-access/bookingcom-agentic-access.yml
