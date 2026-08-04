@@ -1,0 +1,14 @@
+{
+  "provider": "bookingcom",
+  "sources": [
+    "bookingcom-travel-api-openapi.yml"
+  ],
+  "outputs": [
+    "bookingcom-travel-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
