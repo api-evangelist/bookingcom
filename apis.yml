@@ -6,6 +6,18 @@ description: >-
   APIs for affiliate partners and connectivity partners to integrate its extensive travel inventory into third-party
   applications and property management systems.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
